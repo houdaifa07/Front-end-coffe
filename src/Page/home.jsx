@@ -84,7 +84,7 @@ export default function Home() {
         </section>
         <img src={right1} alt="right" className="position-absolute end-0" />
         <section className="container my-5">
-            <div className="allbox1 row">
+            <div className="allbox1 row d-flex flex-wrap">
                 {detaillecoffe.map((ele) => {
                     return <>
                         <div className="box col text-center position-relative ">
@@ -118,8 +118,8 @@ export default function Home() {
                 </div >
                 : ""
         }
-        <section className='section2 position-relative'>
-            <div className="info position-absolute">
+        <section className='section2 position-relative text-md-start'>
+            <div className="info position-absolute  ">
                 <h4 className='mb-4'>Sinply dummy text of the printing </h4>
 
                 <p className='fst-italic'> But Also The Leep into Electronic Typesetting ,
@@ -174,14 +174,14 @@ export default function Home() {
             <img src={right2} alt="right" className="position-absolute end-0 bottom-0" />
             <div className='container position-relative'>
 
-                <div className="allbox1 row">
+                <div className="allbox1 row d-flex flex-wrap">
                     {detaillecoffe.map((ele) => {
                         return <>
                             <div className="box col text-center position-relative ">
                                 <h5>{ele.title}</h5>
                                 <img src={ele.src} alt="7df" />
                                 <p className='fw-bold'>{ele.Paragraph}</p>
-                                <a className="btn-shop px-5" href="./shop" style={{ textDecoration: 'none' }} > Shop coffe</a>
+                                <a className="btn-shop px-5" href="./detaillCoffe" style={{ textDecoration: 'none' }} > Details</a>
                             </div>
                         </>
                     })}

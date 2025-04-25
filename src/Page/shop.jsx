@@ -14,7 +14,7 @@ import axios from 'axios';
 export default function Shop({ searchTerm }) {
 
     const [detaillecoffeshop, setdetaillecoffeshop] = useState([])
-
+    detaillecoffeshop.quantity = 1;
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/product_stocks')
             .then(response => {
@@ -35,6 +35,7 @@ export default function Shop({ searchTerm }) {
     const [shakingId, setShakingId] = useState(null);
 
     const handeldata = (ele) => {
+        ele.quantity = 1;
         dispatch(AddToCart(ele))
         handleRotate(ele.id)
     }
@@ -46,30 +47,31 @@ export default function Shop({ searchTerm }) {
         }, 300);
     };
 
-
     return (
-        <section className="shop-section m-auto mt-5 ">
-            <img src={left1} className='position-absolute end-0' alt="" />
-            <img src={left2} className='position-absolute end-0 bottom-0' alt="" />
+        <section className="shop-section m-auto mt-5">
+            <img src={left1} className='position-absolute end-0' alt="left1" />
+            <img src={left2} className='position-absolute end-0 bottom-0' alt="left2" />
             <div className="container allbox1 row m-auto justify-content-center">
                 {filteredProducts.length > 0 ?
-                    filteredProducts.map((ele) => {
-                        return <>
-                            <div className="box col-3 bg-light text-center position-relative ">
-                                <h5 className='fst-italic'>G.Coffee 75g - {ele.title}</h5>
-                                <img src={`/${ele.image_src}`} alt={ele.title} />
-                                <p className='fw-bold  ' >{ele.price}</p>
-                                <button type='button' className={`btn-shop ${shakingId === ele.id ? 'shake' : ''}`} onClick={() => handeldata(ele)}> Add to Cart</button>
-
-                            </div>
-                        </>
-                    })
+                    filteredProducts.map((ele) => (
+                        <div key={ele.id} className="box col-12 col-sm-6 col-md-4 col-lg-3 bg-light text-center position-relative mb-4">
+                            <h5 className='fst-italic'>G.Coffee 75g - {ele.title}</h5>
+                            <img src={`/${ele.image_src}`} alt={ele.title} className="img-fluid" />
+                            <p className='fw-bold'>{ele.price}</p>
+                            <button
+                                type='button'
+                                className={`btn-shop ${shakingId === ele.id ? 'shake' : ''}`}
+                                onClick={() => handeldata(ele)}
+                            >
+                                Add to Cart
+                            </button>
+                        </div>
+                    ))
                     : <div className='text-center fs-1 fst-italic text-decoration-underline text-gray'>Landing...</div>
                 }
             </div>
-            <img src={right1} className='position-absolute start-0 top-100' alt="" />
-            <img src={right1} className='position-absolute start-0 top-0' alt="" />
-
-        </section >
-    )
+            <img src={right1} className='position-absolute start-0 top-100' alt="right1" />
+            <img src={right1} className='position-absolute start-0 top-0' alt="right1" />
+        </section>
+    );
 }

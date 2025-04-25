@@ -151,7 +151,7 @@ export default function AddProduct() {
         {
             isadmin === true
                 ? <>
-                    <section className="vh-100 mt-5 p-4" >
+                    <section className=" mt-5 p-4" >
                         <table className="table-bordered table table-hover table-striped text-center align-middle">
                             <thead >
                                 <tr style={{ backgroundColor: "#4f3b2e47" }}>

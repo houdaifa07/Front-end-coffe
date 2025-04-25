@@ -22,6 +22,11 @@ function Navbar({ onSearch }) {
 
   const data = useSelector(state => state.cart);
   const counttotal_data = useSelector(state => state.cart.reduce((acc, ele) => acc + (ele.price * ele.quantity), 0));
+  let countdata = 0;
+  data.map(() => {
+    return (countdata += 1);
+  })
+
 
   const dispatch = useDispatch();
 
@@ -106,15 +111,15 @@ function Navbar({ onSearch }) {
       <div className="container mx-auto  d-flex justify-between items-center">
         <img src={Logo} alt='7df' className="h-20 w-auto p-1 " />
         <ul className="d-flex justify-between items-center ">
-          <li>
-            <Link to="/home ">
+          <li class="nav-item">
+            <Link className='nav-link  active' to="/home ">
               Home
             </Link>
           </li>
           <li>
 
             <Link
-              className='position-relative'
+              className='position-relative nav-link  '
               to="/shop"
 
             >
@@ -134,13 +139,43 @@ function Navbar({ onSearch }) {
             </Link>
           </li>
         </ul>
+        {/* <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Active</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul> */}
       </div>
-      <div className="last-info d-flex items-center end-0 ">
+      <div className="last-info d-flex  jusctify-content-center align-items-center text-center end-0 ">
         <input onChange={(e) => { onSearch(e.target.value || "") }} className='serch form-control rounded-md' class=" serch form-control" type="search" placeholder="Search" aria-label="Search" />
         <FontAwesomeIcon icon={faMagnifyingGlass} className="ic text-xl cursor-pointer" />
         <FontAwesomeIcon icon={faCartShopping} className={`ic2 text-xl cursor-pointer ${rotating ? 'rotate' : ''}`} onClick={handlecard} />
+        <div className='' >
+          <p className='' style={{
+            fontSize: "12px",
+            fontWeight: "600",
+            color: "#FFFFFF",
+            backgroundColor: "#6d4b34c2",
+            width: "20px",
+            height: "20px",
+            top: "12%",
+            left: "10%",
+            marginLeft: "14px",
+            borderRadius: " 15px 15px 15px 15px"
+          }}>
+            {countdata}
+          </p>
+        </div>
       </div>
-    </nav>
+    </nav >
     {
       cardbuy === true
         ? <section className='form position-absolute left-0 z-1  container col p-5' style={{ backgroundColor: "white", boxShadow: '6px 6px 10px' }}>

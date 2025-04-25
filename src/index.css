@@ -31,22 +31,24 @@ ul {
 
 .Navbare li a {
   text-decoration: none;
-  color: var(--primary-color);
+  color: black;
   transition: 0.5s;
-  font-weight: bold;
+  font-weight: 500;
   font-style: italic;
 }
 
 li:hover {
-  background-color: var(--primary-color);
-  color: rgb(255, 255, 255);
+  color: var(--primary-color);
   border-radius: 3px;
 }
 
 li:hover a {
-  color: rgb(255, 255, 255);
-
+  color: var(--primary-color);
 }
+
+/* a:active {
+  color: var(--primary-color);
+} */
 
 .Navbare li {
   width: 111%;
@@ -88,6 +90,40 @@ li:hover a {
   margin-left: 25px;
   cursor: pointer;
   color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .Navbare ul {
+    display: flex;
+
+    left: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    align-items: center;
+  }
+
+  .Navbare li {
+    padding-top: 10px;
+    padding-right: 5px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .Navbare .serch {
+    display: none;
+    /* Hide search bar on mobile */
+  }
+
+  .Navbare .ic {
+    display: none;
+    /* Hide icons on mobile */
+  }
+
+  .Navbare .ic2 {
+    /* right: -25px; */
+    /* Hide icons on mobile */
+  }
 }
 
 .sectionL {
@@ -141,13 +177,14 @@ li:hover a {
   padding: 30px 15px;
   margin: 15px;
   /* box-shadow: 0px 4px 1px #ffffff, 0px -3px 0px #ffffff; */
-  border-radius: 10px;
+  border-radius: 6px;
   transition: 0.2s;
+  border: solid 1px var(--primary-color);
 }
 
 .allbox1 .box:hover {
-  box-shadow: 0px 4px 1px #7262574f, 0px -3px 0px #7262574f;
-  transform: translate(4px, 3px);
+  box-shadow: 1px 4px 13px 5px #0000004f;
+  border: none;
 }
 
 .allbox1 .btn-shop {
@@ -184,6 +221,17 @@ li:hover a {
 
 }
 
+@media (max-width: 768px) {
+  .section2 .info {
+    padding-top: 50px;
+    width: 80%;
+    right: 10%;
+    left: 10%;
+    margin: auto;
+    text-align: center;
+  }
+}
+
 .allreview .review {
   min-width: 450px;
   overflow: hidden;
@@ -203,6 +251,13 @@ li:hover a {
 .allreview {
   scroll-behavior: smooth;
 
+}
+
+@media (max-width: 1200px) {
+  .allreview .review {
+    min-width: 400px;
+    /* Adjusts the minimum width on medium screens */
+  }
 }
 
 .allreview::-webkit-scrollbar-track {
