@@ -55,20 +55,20 @@ export default function AddProduct() {
             alert(error.response?.data?.message || 'Error deleting product');
         }
     };
-    const updateProduct = async (id) => {
-        const newTitle = prompt("Enter new title:");
-        const newPrice = prompt("Enter new price:");
-        const newQuantity = prompt("Enter new quantity:");
+    const updateProduct = async (pro) => {
+        const newTitle = prompt("Enter new title:") || pro.title;
+        const newPrice = prompt("Enter new price:") || pro.price;
+        const newQuantity = prompt("Enter new quantity:") || pro.quantity;
 
         try {
-            const response = await axios.put(`http://localhost:8000/api/update_product/${id}`, {
+            const response = await axios.put(`http://localhost:8000/api/update_product/${pro.id}`, {
                 title: newTitle,
                 price: newPrice,
                 quantity: newQuantity,
             });
 
             setstocks(prevStocks =>
-                prevStocks.map(p => p.id === id
+                prevStocks.map(p => p.id === pro.id
                     ? { ...p, title: newTitle, price: newPrice, quantity: newQuantity }
                     : p)
             );
@@ -152,49 +152,77 @@ export default function AddProduct() {
             isadmin === true
                 ? <>
                     <section className=" mt-5 p-4" >
-                        <table className="table-bordered table table-hover table-striped text-center align-middle">
-                            <thead >
-                                <tr style={{ backgroundColor: "#4f3b2e47" }}>
-                                    <th scope="col" style={{ backgroundColor: "#4f3b2e47" }} >Image</th>
-                                    <th scope="col" style={{ backgroundColor: "#4f3b2e47" }} >Title</th>
-                                    <th scope="col" style={{ backgroundColor: "#4f3b2e47" }} >Price</th>
-                                    <th scope="col" style={{ backgroundColor: "#4f3b2e47" }} >Quantity</th>
-                                    <th scope="col" style={{ backgroundColor: "#4f3b2e47" }} >Action</th>
-                                </tr>
-                            </thead>
-                            {stocks.map((pro) => {
-                                return (<tr>
-                                    <td><img style={{ width: "40px", height: "40px" }} src={`${pro.image_src}`} alt="" /></td>
-                                    <td>{pro.title}</td>
-                                    <td>{pro.price}</td>
-                                    <td>{pro.quantity}</td>
-                                    <td>
-                                        <button onClick={() => { updateProduct(pro.id) }} className="btn btn-primary btn-sm me-3 btn-block">Update</button>
-                                        <button onClick={() => { handleDeleteProduct(pro.title) }} className="btn btn-danger btn-sm btn-block">Delete</button>
+                        <div style={{ overflowX: 'auto' }}>
+                            <table className="table-bordered table table-hover table-striped text-center align-middle">
+                                <thead >
+                                    <tr style={{ backgroundColor: "#4f3b2e47" }}>
+                                        <th scope="col" style={{ backgroundColor: "#4f3b2e47" }} >Image</th>
+                                        <th scope="col" style={{ backgroundColor: "#4f3b2e47" }} >Title</th>
+                                        <th scope="col" style={{ backgroundColor: "#4f3b2e47" }} >Price</th>
+                                        <th scope="col" style={{ backgroundColor: "#4f3b2e47" }} >Quantity</th>
+                                        <th scope="col" style={{ backgroundColor: "#4f3b2e47" }} >Action</th>
+                                    </tr>
+                                </thead>
+                                {stocks.map((pro) => {
+                                    return (<tr>
+                                        <td><img style={{ width: "40px", height: "40px" }} src={`${pro.image_src}`} alt="" /></td>
+                                        <td>{pro.title}</td>
+                                        <td>{pro.price}</td>
+                                        <td>{pro.quantity}</td>
+                                        <td>
+                                            <button onClick={() => { updateProduct(pro) }} className="btn btn-primary btn-sm me-3 btn-block">Update</button>
+                                            <button onClick={() => { handleDeleteProduct(pro.title) }} className="btn btn-danger btn-sm btn-block">Delete</button>
 
-                                    </td>
-                                </tr>)
-                            })}
+                                        </td>
+                                    </tr>)
+                                })}
 
-                        </table>
+                            </table>
+                        </div>
                     </section>
-                    <section className="d-flex position-relative p-5  align-items-center justify-content-center my-5 " action="" >
-                        <label htmlFor=""> Title</label>
-                        <input type="text"
-                            onChange={(e) => { setaddproduct(prev => ({ ...prev, title: e.target.value })) }}
-                            className="rounded m-1" />
-                        <label htmlFor=""> Pric</label>
-                        <input type="text"
-                            onChange={(e) => { setaddproduct(prev => ({ ...prev, price: e.target.value })) }}
-                            className="rounded m-1" />
-                        <label htmlFor=""> Quantity</label>
-                        <input type="text"
-                            onChange={(e) => { setaddproduct(prev => ({ ...prev, quantity: e.target.value })) }}
-                            className="rounded m-1" />
-                        <label htmlFor=""> imgage src</label>
-                        <input type="text" className="rounded m-1" />
-                        <button className=" btn btn-primary btn-sm me-3 btn-block   " onClick={sendproduct}> Add</button>
+                    <section className="d-flex flex-column position-relative p-5 align-items-center justify-content-center my-5">
+                        <div className="row w-100">
+                            <div className="col-12 col-sm-6">
+                                <label htmlFor="">Title</label>
+                                <input
+                                    type="text"
+                                    onChange={(e) => { setaddproduct(prev => ({ ...prev, title: e.target.value })) }}
+                                    className="rounded m-1 w-100" />
+                            </div>
+
+                            <div className="col-12 col-sm-6">
+                                <label htmlFor="">Price</label>
+                                <input
+                                    type="text"
+                                    onChange={(e) => { setaddproduct(prev => ({ ...prev, price: e.target.value })) }}
+                                    className="rounded m-1 w-100" />
+                            </div>
+
+                            <div className="col-12 col-sm-6">
+                                <label htmlFor="">Quantity</label>
+                                <input
+                                    type="text"
+                                    onChange={(e) => { setaddproduct(prev => ({ ...prev, quantity: e.target.value })) }}
+                                    className="rounded m-1 w-100" />
+                            </div>
+
+                            <div className="col-12 col-sm-6">
+                                <label htmlFor="">Image src</label>
+                                <input
+                                    type="text"
+                                    className="rounded m-1 w-100" />
+                            </div>
+                        </div>
+
+                        <div className="w-100 text-center mt-3">
+                            <button
+                                className="btn btn-primary btn-sm me-3 btn-block"
+                                onClick={sendproduct}>
+                                Add
+                            </button>
+                        </div>
                     </section>
+
                 </>
                 : ""
         }

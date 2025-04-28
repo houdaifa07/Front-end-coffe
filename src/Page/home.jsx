@@ -35,20 +35,20 @@ export default function Home() {
 
     const detaillecoffe = [
         {
-            title: 'Gemahlen coffe 75g',
+            title: 'Gemahlen coffe -Macchiato',
             src: product1,
-            Paragraph: 18.65
+            Paragraph: 30.03
 
         },
         {
-            title: 'Gemahlen coffe 75g',
+            title: 'Gemahlen coffe -Espresso',
             src: product1,
-            Paragraph: 18.65
+            Paragraph: 44.01
         },
         {
-            title: 'Gemahlen coffe 75g',
+            title: 'Gemahlen coffe- Cappuccino',
             src: product2,
-            Paragraph: 18.65
+            Paragraph: 30.03
         }
     ];
     const reviews = [
@@ -173,7 +173,6 @@ export default function Home() {
         <section className=" position-relative">
             <img src={right2} alt="right" className="position-absolute end-0 bottom-0" />
             <div className='container position-relative'>
-
                 <div className="allbox1 row d-flex flex-wrap">
                     {detaillecoffe.map((ele) => {
                         return <>
@@ -181,7 +180,8 @@ export default function Home() {
                                 <h5>{ele.title}</h5>
                                 <img src={ele.src} alt="7df" />
                                 <p className='fw-bold'>{ele.Paragraph}</p>
-                                <a className="btn-shop px-5" href="./detaillCoffe" style={{ textDecoration: 'none' }} > Details</a>
+                                <a className="btn-shop px-5" href="./shop" style={{ textDecoration: 'none' }} > Shop now</a>
+
                             </div>
                         </>
                     })}

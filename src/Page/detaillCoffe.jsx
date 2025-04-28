@@ -31,13 +31,15 @@ export function Details() {
                             <span className="fst-italic me-3" style={{ color: '#a54d10c7' }}> • Versatile Brewing Options :</span> Ideal for espresso, drip, French press, and pour-over brewing methods.<br />
                         </div>
                         <h4 className="mt-3 fst-italic mb-1" style={{ color: 'rgb(79 59 46 / 97%)' }}>Brewing Recommendations</h4>
-                        <div>
+                        <div className="">
                             <span className="fst-italic me-3" style={{ color: '#a54d10c7' }}> • Espresso :</span> Use 18-20 grams of ground coffee for a rich and full-bodied shot.<br />
                             <span className="fst-italic me-3" style={{ color: '#a54d10c7' }}> • French Press :</span> Use 1-2 tablespoons per cup for a full flavor.<br />
                             <span className="fst-italic me-3" style={{ color: '#a54d10c7' }}> • Drip Coffee Maker :</span> Use 2 tablespoons of coffee per 6 ounces of water for a smooth, robust flavor.<br />
                             <span className="fst-italic me-3" style={{ color: '#a54d10c7' }}> • Versatile Brewing Options :</span> Add 1 to 1.5 tablespoons of coffee per cup for a balanced brew.<br />
                             <p><span className="fst-italic me-3" style={{ color: '#a54d10c7' }}>  • Customer Reviews:</span> ⭐️⭐️⭐️⭐️⭐️ (4.8/5)</p>
                         </div>
+                        <a className="btn-shop  px-5" href="./shop" style={{ textDecoration: 'none' }} > Shop</a>
+
                     </div>
                 </div>
 
@@ -50,6 +52,7 @@ export function Details() {
                         <span className="fst-italic me-3" style={{ color: '#a54d10c7' }}>Capacity :</span> 250g / 500g / selectable options<br />
                     </div>
                 </div>
+
             </section>
         </>
     );

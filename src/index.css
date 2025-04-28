@@ -120,6 +120,15 @@ li:hover a {
     /* Hide icons on mobile */
   }
 
+  @media (max-width: 768px) {
+    .Navbare .ic2 {
+      position: absolute;
+      right: -48px;
+      top: 32px;
+    }
+
+  }
+
   .Navbare .ic2 {
     /* right: -25px; */
     /* Hide icons on mobile */

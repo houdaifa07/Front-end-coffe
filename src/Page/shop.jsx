@@ -40,6 +40,7 @@ export default function Shop({ searchTerm }) {
         handleRotate(ele.id)
     }
 
+
     const handleRotate = (id) => {
         setShakingId(id);
         setTimeout(() => {

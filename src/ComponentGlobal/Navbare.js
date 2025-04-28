@@ -93,6 +93,7 @@ function Navbar({ onSearch }) {
       const response = await axios.post('http://localhost:8000/api/post_product', { items: cartItems });
       alert('Products buyed successfully ');
       console.log(response.data);
+      updateStock()
     } catch (error) {
       console.error('Full Axios Error:', error); // Logs everything
       console.log('Response:', error.response);  // Logs Laravel response
@@ -104,81 +105,82 @@ function Navbar({ onSearch }) {
       setopencard(false);
       setcardbuy(false);
     }, 400)
+
   };
+  async function updateStock(itemsSold) {
+    try {
+      const response = await axios.post('http://localhost:8000/api/update_stock', {
+        items: itemsSold,
+      });
+
+      console.log(response.data.message);
+    } catch (error) {
+      console.error(error.response.data.message);
+    }
+  }
 
   return (<>
-    <nav className="Navbare z-1 bg-white position-relative container mx-auto  d-flex justify-between items-center">
-      <div className="container mx-auto  d-flex justify-between items-center">
-        <img src={Logo} alt='7df' className="h-20 w-auto p-1 " />
-        <ul className="d-flex justify-between items-center ">
-          <li class="nav-item">
-            <Link className='nav-link  active' to="/home ">
+
+    <nav className="Navbare bg-white position-relative container mx-auto d-flex justify-between items-center p-2 flex-row"
+      style={{
+        position: window.innerWidth < 768 ? 'static' : 'fixed', // Responsive position
+        width: '100%',
+        zIndex: 10
+      }}
+    >
+      {/* Logo and Links */}
+      <div className="container mx-auto d-flex justify-between items-center flex-row">
+        <img src={Logo} alt='7df' className="h-20 w-auto p-1" />
+
+        {/* Links */}
+        <ul className="d-flex justify-between items-center gap-3 flex-row">
+          <li className="nav-item">
+            <Link className='nav-link active' to="/home">
               Home
             </Link>
           </li>
-          <li>
-
-            <Link
-              className='position-relative nav-link  '
-              to="/shop"
-
-            >
+          <li className="nav-item">
+            <Link className='position-relative nav-link' to="/shop">
               Shop
             </Link>
           </li>
-          <li>
-            <Link
-              to="/contacte">
+          <li className="nav-item">
+            <Link className='nav-link' to="/contacte">
               Contact
             </Link>
           </li>
-          <li>
-            <Link
-              to="/Add_product">
+          <li className="nav-item">
+            <Link className='nav-link' to="/Add_product">
               Admin
             </Link>
           </li>
         </ul>
-        {/* <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Active</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul> */}
       </div>
-      <div className="last-info d-flex  jusctify-content-center align-items-center text-center end-0 ">
-        <input onChange={(e) => { onSearch(e.target.value || "") }} className='serch form-control rounded-md' class=" serch form-control" type="search" placeholder="Search" aria-label="Search" />
-        <FontAwesomeIcon icon={faMagnifyingGlass} className="ic text-xl cursor-pointer" />
-        <FontAwesomeIcon icon={faCartShopping} className={`ic2 text-xl cursor-pointer ${rotating ? 'rotate' : ''}`} onClick={handlecard} />
-        <div className='' >
-          <p className='' style={{
-            fontSize: "12px",
-            fontWeight: "600",
-            color: "#FFFFFF",
-            backgroundColor: "#6d4b34c2",
-            width: "20px",
-            height: "20px",
-            top: "12%",
-            left: "10%",
-            marginLeft: "14px",
-            borderRadius: " 15px 15px 15px 15px"
-          }}>
-            {countdata}
-          </p>
-        </div>
-      </div>
-    </nav >
+
+      <div className="last-info d-flex justify-content-center align-items-center text-center end-0 flex-row">
+        <input
+          onChange={(e) => { onSearch(e.target.value || "") }}
+          className='serch form-control rounded-md'
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <FontAwesomeIcon icon={faMagnifyingGlass} className="ic text-xl cursor-pointer mx-2" />
+        <FontAwesomeIcon
+          icon={faCartShopping}
+          className={`ic2 text-xl cursor-pointer ${rotating ? 'rotate' : ''}`}
+          onClick={handlecard}
+        />
+        <div
+          className="badge  rounded-circle d-flex align-items-center ms-3 justify-content-center d-none d-md-flex"
+          style={{ width: "17px", height: "17px", backgroundColor: "#6f4e37c7" }}
+        >
+          {countdata}
+        </div>      </div>
+    </nav>
     {
       cardbuy === true
-        ? <section className='form position-absolute left-0 z-1  container col p-5' style={{ backgroundColor: "white", boxShadow: '6px 6px 10px' }}>
+        ? <section className='form position-absolute start-0  z-1  container col p-5' style={{ backgroundColor: "white", boxShadow: '6px 6px 10px' }}>
           <div className='mb-4'>
             <label className="block mb-2 font-medium" htmlFor='name'>
               Name
@@ -254,7 +256,7 @@ function Navbar({ onSearch }) {
               className="btn-shop w-50 "
               onClick={handelchaking}
             >
-              Send
+              Buy
             </button>
             <button
               className="btn-shop w-50  "
@@ -269,37 +271,39 @@ function Navbar({ onSearch }) {
     }
     {
       opencard === true
-
-        ?
-        <div className='all-cart  position-absolute top-5 end-0 w-full h-full'>
-          {
-            data.map((ele) => (
-              <div key={ele.id} className='cart items-center'>
-                <img src={`/${ele.image_src}`} alt={ele.title} className='h-20 w-20' />
-                <div className='info-card d-flex justify-around items-center'>
-                  <div className='title-cart fst-italic w-50 border-end border-3'>
-                    {ele.title}
+        ? (
+          <div className='all-cart position-absolute top-5 end-0 w-50-lg w-100-md h-full'>
+            {
+              data.map((ele) => (
+                <div key={ele.id} className='cart items-center'>
+                  <img src={`/${ele.image_src}`} alt={ele.title} className='h-20 w-20' />
+                  <div className='info-card d-flex justify-around items-center'>
+                    <div className='title-cart fst-italic w-50 border-end border-3'>
+                      {ele.title}
+                    </div>
+                    <p className='price-cart fst-italic m-1 ms-3'>
+                      Price: {ele.quantity} x {ele.price}
+                    </p>
+                    <FaTrash
+                      className='text-danger end-0 my-3 me-3 position-absolute'
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => { handeldelete(ele.id) }}
+                    />
                   </div>
-                  <p className='price-cart fst-italic m-1 ms-3'>
-                    Price: {ele.quantity} x {ele.price}
-                  </p>
-                  <FaTrash
-                    className='text-danger end-0 my-3 me-3 position-absolute'
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => { handeldelete(ele.id) }}
-                  />
                 </div>
+              ))
+            }
+            <div className='d-flex items-center justify-content-between p-2'>
+              <button
+                className={`btn-shop ${shakingId === true ? 'shake' : ''}`} onClick={() => { setcardbuy(true); setopencard(false); }} >
+                Buy Now
+              </button>
+              <div>
+                <div className='me-5'> {parseFloat(counttotal_data.toFixed(2))} </div>
               </div>
-            ))
-          }
-          <div className='d-flex items-center  justify-content-between p-2 '>
-
-            <button className={`btn-shop ${shakingId === true ? 'shake' : ''}`} onClick={() => { setcardbuy(true); setopencard(false) }}> Buy Now</button>
-            <div>
-              <div className='me-5'> {parseFloat(counttotal_data.toFixed(2))} </div>
             </div>
           </div>
-        </div >
+        )
         : ''
     }
   </>);
