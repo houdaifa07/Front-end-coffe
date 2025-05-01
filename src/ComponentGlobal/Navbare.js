@@ -1,4 +1,3 @@
-// import React, { useState } from 'react';
 import Logo from '../Logo/Gemahlen Logo.svg';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,7 +5,6 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-// import product from '../Images/Product Image - Variant 1.jpg'
 import { useDispatch, useSelector } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import { Dellet } from '../reduxe/action';
@@ -18,7 +16,6 @@ function Navbar({ onSearch }) {
   const [opencard, setopencard] = useState(false);
   const [cardbuy, setcardbuy] = useState(false);
 
-  // const [data, setdata] = useState(false);
 
   const data = useSelector(state => state.cart);
   const counttotal_data = useSelector(state => state.cart.reduce((acc, ele) => acc + (ele.price * ele.quantity), 0));
@@ -93,10 +90,16 @@ function Navbar({ onSearch }) {
       const response = await axios.post('http://localhost:8000/api/post_product', { items: cartItems });
       alert('Products buyed successfully ');
       console.log(response.data);
-      updateStock()
+      const itemsSold = data.map(item => ({
+        id: item.id, // Assuming each item has an 'id' property
+        quantity: item.quantity
+      }));
+
+      // Call updateStock with the items sold
+      await updateStock(itemsSold);
     } catch (error) {
-      console.error('Full Axios Error:', error); // Logs everything
-      console.log('Response:', error.response);  // Logs Laravel response
+      console.error('Full Axios Error:', error);
+      console.log('Response:', error.response);
       alert(error.response?.data?.message || 'There was an error with your purchase. Please try again.');
     }
     setcardbuy(true)
@@ -112,28 +115,29 @@ function Navbar({ onSearch }) {
       const response = await axios.post('http://localhost:8000/api/update_stock', {
         items: itemsSold,
       });
-
       console.log(response.data.message);
     } catch (error) {
-      console.error(error.response.data.message);
+      console.error('Error updating stock:', error);
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+        console.error('Response status:', error.response.status);
+      }
     }
   }
 
   return (<>
 
-    <nav className="Navbare bg-white position-relative container mx-auto d-flex justify-between items-center p-2 flex-row"
+    <nav className="Navbare bg-white position-relative container mx-auto d-flex justify-between items-center p-2 "
       style={{
-        position: window.innerWidth < 768 ? 'static' : 'fixed', // Responsive position
+        position: window.innerWidth < 768 ? 'static' : 'fixed',
         width: '100%',
-        zIndex: 10
+        zIndex: 100
       }}
     >
-      {/* Logo and Links */}
       <div className="container mx-auto d-flex justify-between items-center flex-row">
-        <img src={Logo} alt='7df' className="h-20 w-auto p-1" />
+        <img src={Logo} alt='7df' className="me-5 h-20 w-auto p-1" />
 
-        {/* Links */}
-        <ul className="d-flex justify-between items-center gap-3 flex-row">
+        <ul className="d-flex justify-between  items-center gap-3 flex-row">
           <li className="nav-item">
             <Link className='nav-link active' to="/home">
               Home
@@ -180,7 +184,7 @@ function Navbar({ onSearch }) {
     </nav>
     {
       cardbuy === true
-        ? <section className='form position-absolute start-0  z-1  container col p-5' style={{ backgroundColor: "white", boxShadow: '6px 6px 10px' }}>
+        ? <section className='form position-absolute start-0   container col p-5' style={{ backgroundColor: "white", boxShadow: '6px 6px 10px', zIndex: "99 " }}>
           <div className='mb-4'>
             <label className="block mb-2 font-medium" htmlFor='name'>
               Name
@@ -202,7 +206,7 @@ function Navbar({ onSearch }) {
               <input
                 className='border rounded w-[400px] py-2 px-3 focus:outline-none w-100'
                 id='name'
-                type='text'
+                type='integer'
                 placeholder='Card Number'
                 onChange={(e) => { setdatacardbuy(prev => ({ ...prev, CardNumber: e.target.value })) }}
 
@@ -214,7 +218,6 @@ function Navbar({ onSearch }) {
               </label>
               <input
                 className='border rounded w-[400px] py-2 px-3 focus:outline-none w-100'
-                id='email'
                 type='text'
                 placeholder='Issuing Country/region'
                 onChange={(e) => { setdatacardbuy(prev => ({ ...prev, IssuingCountOryregion: e.target.value })) }}
@@ -230,8 +233,7 @@ function Navbar({ onSearch }) {
               </label>
               <input
                 className='border rounded w-[400px] py-2 px-3 focus:outline-none w-100'
-                id='email'
-                type='text'
+                type='integer'
                 placeholder='Expiry Date'
                 onChange={(e) => { setdatacardbuy(prev => ({ ...prev, ExpiryDate: e.target.value })) }}
 
@@ -244,7 +246,6 @@ function Navbar({ onSearch }) {
               </label>
               <input
                 className='border rounded w-[400px] py-2 px-3 focus:outline-none w-100'
-                id='email'
                 type='text'
                 placeholder='CID'
                 onChange={(e) => { setdatacardbuy(prev => ({ ...prev, CID: e.target.value })) }}
@@ -272,7 +273,7 @@ function Navbar({ onSearch }) {
     {
       opencard === true
         ? (
-          <div className='all-cart position-absolute top-5 end-0 w-50-lg w-100-md h-full'>
+          <div style={{ zIndex: 10 }} className='all-cart position-absolute top-5 end-0 w-50-lg w-100-md h-full'>
             {
               data.map((ele) => (
                 <div key={ele.id} className='cart items-center'>

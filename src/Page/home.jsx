@@ -11,14 +11,6 @@ import { useEffect, useState } from 'react';
 
 
 export default function Home() {
-    const handleClick = () => {
-        window.scrollTo({
-            top: 1693,
-            behavior: 'smooth'
-        });
-    }
-
-
 
     const [open, setopen] = useState(false);
     const opencard = () => {
@@ -79,7 +71,10 @@ export default function Home() {
                 <h1 className="samall-title text-4xl font-bold">Yhe Perfect Gift   </h1>
                 <h1 className="samall-title text-4xl font-bold"> For Coffe Lovers  </h1>
                 <p className="got  ">Giv them Something they'll Love </p>
-                <button className="btn-shop" onClick={handleClick}> Shop coffe</button>
+                <a href='#my-section'>
+
+                    <button className="btn-shop" >  Shop coffe</button>
+                </a>
             </div>
         </section>
         <img src={right1} alt="right" className="position-absolute end-0" />
@@ -125,7 +120,10 @@ export default function Home() {
                 <p className='fst-italic'> But Also The Leep into Electronic Typesetting ,
                     Remaining Essaintially Unchanged.it Was Popularised in The 1960s Whith The Release Of Letrase Sheets Containing Lorem lpsum passages
                 </p>
-                <button onClick={handleClick} type='button' className="btn-shop fst-italic"> Shop coffe</button>
+                <a href='#my-section'>
+
+                    <button className="btn-shop" >  Shop coffe</button>
+                </a>
 
             </div>
         </section>
@@ -170,7 +168,7 @@ export default function Home() {
             <h1 className='mt-5 text-coffe'>Get your Coffee</h1>
             <p className='fst-italic'>Hot , Cold Sweet Or Straitght Up We've Got the Brew For You </p>
         </div >
-        <section className=" position-relative">
+        <section id="my-section" className=" position-relative">
             <img src={right2} alt="right" className="position-absolute end-0 bottom-0" />
             <div className='container position-relative'>
                 <div className="allbox1 row d-flex flex-wrap">
@@ -180,7 +178,7 @@ export default function Home() {
                                 <h5>{ele.title}</h5>
                                 <img src={ele.src} alt="7df" />
                                 <p className='fw-bold'>{ele.Paragraph}</p>
-                                <a className="btn-shop px-5" href="./shop" style={{ textDecoration: 'none' }} > Shop now</a>
+                                <a className="btn-shop px-5" href="./shop" style={{ textDecoration: 'none' }} >  Shop</a>
 
                             </div>
                         </>

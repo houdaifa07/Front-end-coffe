@@ -46,94 +46,104 @@ li:hover a {
   color: var(--primary-color);
 }
 
-/* a:active {
-  color: var(--primary-color);
-} */
 
-.Navbare li {
-  width: 111%;
-  position: relative;
-  text-align: center;
-  align-items: center;
-  padding-top: 13px;
-  height: 100%;
-  transition: 0.5s;
+
+.Navbare {
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  padding: 10px 20px;
+}
+
+.Navbare img {
+  height: 50px;
 }
 
 .Navbare ul {
-  height: 55px;
-  left: 30%;
-  width: 30%;
-  position: relative;
+  list-style: none;
+  padding: 0;
   margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.Navbare .nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.Navbare .nav-link:hover {
+  color: #6f4e37;
+}
+
+.last-info {
+  display: flex;
   align-items: center;
 }
 
-.Navbare .serch {
-  border-radius: 25px;
+.serch {
+  width: 200px;
 }
 
-.Navbare .last-info {
-  position: absolute;
-  margin: 7px 55px;
-}
-
-.Navbare .ic {
-  margin-top: 3%;
-  margin-left: 5%;
+.ic {
   cursor: pointer;
-  color: var(--primary-color);
-}
-
-.Navbare .ic2 {
-  margin-top: 4%;
-  margin-left: 25px;
-  cursor: pointer;
-  color: var(--primary-color);
+  margin-left: 10px;
 }
 
 @media (max-width: 768px) {
-  .Navbare ul {
-    display: flex;
-
-    left: 0;
-    padding: 0;
-    margin: 0;
-    width: 100%;
+  .Navbare {
+    flex-direction: column;
     align-items: center;
+    position: static !important;
+    top: 0;
   }
 
-  .Navbare li {
-    padding-top: 10px;
-    padding-right: 5px;
+  .Navbare ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .serch {
     width: 100%;
-    text-align: center;
+    margin-top: 10px;
   }
 
-  .Navbare .serch {
+  .last-info {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .badge {
     display: none;
-    /* Hide search bar on mobile */
-  }
-
-  .Navbare .ic {
-    display: none;
-    /* Hide icons on mobile */
-  }
-
-  @media (max-width: 768px) {
-    .Navbare .ic2 {
-      position: absolute;
-      right: -48px;
-      top: 32px;
-    }
-
-  }
-
-  .Navbare .ic2 {
-    /* right: -25px; */
-    /* Hide icons on mobile */
   }
 }
+
+.all-cart {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 100%;
+  max-width: 600px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+}
+
+.Navbare .form {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+}
+
 
 .sectionL {
   padding: auto;
@@ -184,8 +194,10 @@ li:hover a {
 
 .allbox1 .box {
   padding: 30px 15px;
+  z-index: 5;
+  background-color: white;
   margin: 15px;
-  /* box-shadow: 0px 4px 1px #ffffff, 0px -3px 0px #ffffff; */
+  min-width: 275px;
   border-radius: 6px;
   transition: 0.2s;
   border: solid 1px var(--primary-color);
@@ -263,9 +275,19 @@ li:hover a {
 }
 
 @media (max-width: 1200px) {
+  .shop-section {
+
+    padding-top: 90px;
+  }
+
+  .section-stock {
+    padding-top: 122px !important;
+  }
+}
+
+@media (max-width: 1200px) {
   .allreview .review {
     min-width: 400px;
-    /* Adjusts the minimum width on medium screens */
   }
 }
 
@@ -364,6 +386,12 @@ li:hover a {
 
 .all-cart .cart .info-card {
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  .imgdetaills {
+    width: 25opx !important;
+  }
 }
 
 @keyframes rotate {

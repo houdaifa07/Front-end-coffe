@@ -124,7 +124,8 @@ export default function AddProduct() {
                                                 </div>
 
                                                 <h5 className="fw-normal mb-3" style={{ letterSpacing: "1px" }}>Sign into your account</h5>
-
+                                                <div>(oublhoudaifa00@gmail.com  ---- code : 1234  (for test))</div>
+                                                <div></div>
                                                 <div className="form-outline mb-4">
                                                     <input type="email" onChange={(e) => { setemail(e.target.value) }} id="email" className="form-control form-control-lg" />
                                                     <label className="form-label" htmlFor="email">Email address</label>
@@ -151,7 +152,7 @@ export default function AddProduct() {
         {
             isadmin === true
                 ? <>
-                    <section className=" mt-5 p-4" >
+                    <section className="section-stock mt-5 p-4" >
                         <div style={{ overflowX: 'auto' }}>
                             <table className="table-bordered table table-hover table-striped text-center align-middle">
                                 <thead >
@@ -206,12 +207,7 @@ export default function AddProduct() {
                                     className="rounded m-1 w-100" />
                             </div>
 
-                            <div className="col-12 col-sm-6">
-                                <label htmlFor="">Image src</label>
-                                <input
-                                    type="text"
-                                    className="rounded m-1 w-100" />
-                            </div>
+
                         </div>
 
                         <div className="w-100 text-center mt-3">

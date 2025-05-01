@@ -88,9 +88,7 @@ export function Contacte() {
                             type='email'
                             placeholder='Your Email'
                             value={datareview.email}
-
                             onChange={(e) => { setdatareview(prev => ({ ...prev, email: e.target.value })) }}
-
                         />
                     </div>
                     <div className='mb-4'>

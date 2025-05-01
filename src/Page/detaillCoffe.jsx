@@ -9,7 +9,7 @@ export function Details() {
                 <h1 className="text-center fst-italic mx-3 my-3" style={{ color: 'rgb(79 59 46 / 97%)' }}>GEMAHLEN COFFEE</h1>
             </div>
             <div className="d-flex align-items-center justify-content-center mb-3">
-                <img src="/Gemahlen Logo.svg" alt="Gemahlen Logo" className="img-fluid" style={{ maxWidth: '150px' }} />
+                <img src="/Gemahlen Logo.svg" alt="Gemahlen Logo" className="imgdetaills img-fluid" style={{ maxWidth: '150px' }} />
                 <h3 className="text-center fst-italic ms-3" style={{ color: 'rgb(79 59 46 / 97%)' }}>Product Design Page</h3>
             </div>
 
